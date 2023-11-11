@@ -1,0 +1,173 @@
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>EvIs-Kitchen Dataset</h1>
+        <p style="font-size:12px; margin-top: -14px;">Shinoda Laboratory, Tokyo Institute of Technology</p>
+        <p style="font-size:12px; margin-top: -10px;">Denso IT Recognition Learning Algorithm Laboratory</p>
+        <img src="assets/titech.png" style="margin-right: 10px" width="65px">
+        <img src="assets/denso.png" style="margin-bottom: 2px;" width="85px">
+      </div>
+
+      <div class="section">
+        <h2>[ Information ]:</h2>
+        <p>
+          <b>E</b>gocentric <b>v</b>ideo and <b>I</b>nertial <b>s</b>ensor data
+          Kitchen activity dataset is the first V-S-S interaction-focused
+          dataset for the ego-HAR task.
+        </p>
+        <p>
+          It consists of sequences of everyday kitchen activities as it involves
+          rich interactions among the subject's body, object, and environment.
+        </p>
+        <p>
+          Besides the egocentric videos recorded by GoPro camera, our dataset
+          also includes the inertial sensor data recorded from the Fitbit
+          watches attached on the subject's wrists, which are synchronized
+          correlated with video data stream.
+        </p>
+        <p>
+          In total, our dataset contains <b>4,527</b> action samples from
+          <b>12</b> subjects and <b>7</b> recipes, with <b>35</b> verb classes
+          label and <b>56</b> noun classes label.
+        </p>
+        <div class="img-container">
+          <img src="assets/dataset-numN.png" width="85%" alt="" />
+          <img src="assets/dataset-numV.png" width="85%" alt="" />
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>[ Content ]:</h2>
+        <p>
+          Our dataset contains 4 major folders: <code>/Annotation</code>,
+          <code>/Video</code>, <code>/RGB-frames</code>, and
+          <code>/Sensor</code>
+        </p>
+
+        <div class="content">
+          <h3><code>/Annotation</code>:</h3>
+          <p>
+            The annotation of all action segments are in one
+            <code>csv</code> file. Each line in this file is an annotation for a
+            sample:
+          </p>
+
+          <ul>
+            <li>
+              <code><b>narration_id</b></code> <code>("S01R01_011")</code>:
+              "S01" means this action is from subject-1. "R01" means it is from
+              recipe-1. The following "011" is the index of this action in the
+              entire cooking process.
+            </li>
+            <li>
+              <code><b>verb</b></code> <code>("crack")</code>: The Verb label of
+              this action segment.
+            </li>
+            <li>
+              <code><b>noun</b></code> <code>("egg")</code>: The Noun label of
+              this action segment.
+            </li>
+            <li>
+              <code><b>start_frame</b></code> <code>(4215)</code>: The index of
+              frame (in RGB-frames sequence and in Sensor sequence) when this
+              action starts.
+            </li>
+            <li>
+              <code><b>stop_frame</b></code> <code>(4394)</code>: The index of
+              frame (in RGB-frames sequence and in Sensor sequence) when this
+              action ends.
+            </li>
+            <li>
+              <code><b>start_time</b></code> <code>(02:20.5)</code>: The time
+              ine the Video when this action starts.
+            </li>
+            <li>
+              <code><b>stop_time</b></code> <code>(02.26.4)</code>: The time ine
+              the Video when this action ends.
+            </li>
+            <li>
+              <code><b>temporal_length</b></code> <code>(5976)</code>: The
+              temporal length how long does this action last (with
+              <code>ms</code> as unit).
+            </li>
+          </ul>
+        </div>
+
+        <div class="content">
+          <h3><code>/Video</code>:</h3>
+          <p>
+            The original raw video recorded by the GoPro camera, with 1920x1080
+            resolution in 60fps. Each MP4 file is a complete process of one
+            subject cooking one of the recipes, and contains many action
+            segments.
+          </p>
+        </div>
+
+        <div class="content">
+          <h3><code>/RGB-frames</code>:</h3>
+          <p>
+            The 30fps video frames sequence of each long video in
+            <code>/Video</code> directory. Each folder contains the frame
+            sequence for the corresponding long cooking video.
+          </p>
+          <p>
+            All frame image is resize to 228x128 for reducing the redundancy,
+            saving more GPU memory cost during the training.
+          </p>
+        </div>
+
+        <div class="content">
+          <h3><code>/Sensor</code>:</h3>
+          <p>
+            The 30fps inertial sensor data recorded by the Fitbit watches in
+            <code>npy</code> format. Each <code>npy</code> file contains the
+            complete sensor data sequence for the corresponding long cooking
+            video.
+          </p>
+          <p>
+            For the sensor data sequence, the shape of each frame is (2,10). The
+            first dimension means the left/right hands, their order is [left,
+            right]. The second dimension means the 10 inertial sensor data,
+            which are: 3-axis accelerometer, 3-axis gyroscope, 4-digit
+            orientation. The order of the 10 inertial sensor data is: [acc-x,
+            acc-y, acc-z, gyro-x, gyro-y, gyro-z, ori-a, ori-b, ori-c, ori-d]
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>[ Publication ]:</h2>
+        <p>
+          Please cite our paper if you want to use this Dataset for your
+          Research.
+        </p>
+        <pre id="cite-area">
+@inproceedings{hao2023evis,
+    title={EvIs-Kitchen: Egocentric Human Activities Recognition with Video and Inertial Sensor Data},
+    author={Hao, Yuzhe and Uto, Kuniaki and Kanezaki, Asako and Sato, Ikuro and Kawakami, Rei and Shinoda, Koichi},
+    booktitle={International Conference on Multimedia Modeling},
+    pages={373--384},
+    year={2023},
+    organization={Springer}
+}</pre
+        >
+      </div>
+
+      <div class="section">
+        <h2>[ Access ]:</h2>
+        <p>
+          Please send an application email to
+          <code>yuzhe[at]ks.c.titech.ac.jp</code>, with including your Name,
+          Institute, Purpose, to obtain the access of the dataset.
+        </p>
+      </div>
+    </div>
+    <br /><br /><br /><br />
+  </body>
+</html>
